@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ReVault - Private Password Manager</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#07131f;
+color:white;
+overflow-x:hidden;
+}
+
+.container{
+width:min(1200px,90%);
+margin:auto;
+}
+
+nav{
+position:sticky;
+top:0;
+z-index:100;
+backdrop-filter:blur(20px);
+background:rgba(7,19,31,.85);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+}
+
+.logo{
+font-size:26px;
+font-weight:800;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo span{
+color:#0cc0df;
+}
+
+.nav-links{
+display:flex;
+gap:32px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#c9d6df;
+font-size:15px;
+transition:.25s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.download-btn{
+background:#0cc0df;
+color:#04131e;
+padding:12px 22px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+}
+
+.hero{
+padding:100px 0;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 14px;
+background:rgba(12,192,223,.12);
+border:1px solid rgba(12,192,223,.2);
+border-radius:999px;
+color:#0cc0df;
+font-size:14px;
+margin-bottom:24px;
+}
+
+.hero h1{
+font-size:64px;
+line-height:1.05;
+font-weight:800;
+margin-bottom:24px;
+}
+
+.hero p{
+font-size:18px;
+color:#b5c4cf;
+line-height:1.8;
+margin-bottom:36px;
+}
+
+.hero-actions{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+}
+
+.primary-btn{
+background:#0cc0df;
+color:#07131f;
+padding:16px 28px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+}
+
+.secondary-btn{
+border:1px solid rgba(255,255,255,.15);
+padding:16px 28px;
+border-radius:14px;
+text-decoration:none;
+color:white;
+}
+
+.stats{
+display:flex;
+gap:30px;
+margin-top:40px;
+}
+
+.stat h3{
+font-size:30px;
+font-weight:800;
+}
+
+.stat p{
+margin-top:4px;
+font-size:14px;
+color:#8da0ad;
+}
+
+.hero-card{
+background:#0f2030;
+border:1px solid rgba(255,255,255,.08);
+border-radius:28px;
+padding:30px;
+}
+
+.vault-item{
+background:#16293a;
+padding:18px;
+border-radius:16px;
+margin-bottom:16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.vault-item h4{
+font-size:16px;
+margin-bottom:4px;
+}
+
+.vault-item span{
+font-size:13px;
+color:#92a6b5;
+}
+
+.features{
+padding:100px 0;
+}
+
+.section-title{
+text-align:center;
+font-size:42px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.section-subtitle{
+text-align:center;
+max-width:700px;
+margin:auto;
+color:#9fb2bf;
+margin-bottom:60px;
+line-height:1.8;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+}
+
+.feature{
+background:#0f2030;
+padding:30px;
+border-radius:22px;
+border:1px solid rgba(255,255,255,.06);
+transition:.25s;
+}
+
+.feature:hover{
+transform:translateY(-6px);
+}
+
+.feature-icon{
+font-size:38px;
+margin-bottom:18px;
+}
+
+.feature h3{
+margin-bottom:12px;
+font-size:20px;
+}
+
+.feature p{
+color:#9fb2bf;
+line-height:1.7;
+}
+
+.security{
+padding:100px 0;
+}
+
+.security-box{
+background:#0f2030;
+padding:50px;
+border-radius:28px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+}
+
+.security-list{
+list-style:none;
+}
+
+.security-list li{
+padding:14px 0;
+color:#c9d6df;
+}
+
+.security-list li::before{
+content:"✓ ";
+color:#0cc0df;
+font-weight:bold;
+}
+
+.download{
+padding:120px 0;
+text-align:center;
+}
+
+.download h2{
+font-size:48px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.download p{
+max-width:700px;
+margin:auto;
+color:#a9bac5;
+line-height:1.8;
+margin-bottom:40px;
+}
+
+.download-button{
+display:inline-block;
+background:#0cc0df;
+color:#07131f;
+padding:20px 42px;
+border-radius:18px;
+font-size:18px;
+font-weight:800;
+text-decoration:none;
+}
+
+footer{
+padding:40px 0;
+border-top:1px solid rgba(255,255,255,.08);
+text-align:center;
+color:#8797a3;
+}
+
+@media(max-width:900px){
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.security-box{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.nav-links{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container nav-content">
+
+<div class="logo">
+<img src="assets/revaultLogo.png" alt="ReVault Logo" width="40" height="40"> <span>ReVault</span>
+
+</div>
+
+<div class="nav-links">
+<a href="#features">Features</a>
+<a href="#security">Security</a>
+<a href="#download">Download</a>
+</div>
+
+<a href="assets/ReVault.apk" class="download-btn">
+Download APK
+</a>
+
+</div>
+</nav>
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+
+<div class="hero-badge">
+Private • Offline • Local First
+</div>
+
+<h1>
+Your passwords stay
+on your device.
+</h1>
+
+<p>
+ReVault is a local-first password manager built for privacy.
+Store passwords, usernames, websites and secure notes without
+cloud sync, subscriptions or third-party access.
+</p>
+
+<div class="hero-actions">
+
+<a href="assets/ReVault.apk" class="primary-btn">
+Download for Android
+</a>
+
+<a href="#features" class="secondary-btn">
+View Features
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h3>100%</h3>
+<p>Offline Access</p>
+</div>
+
+<div class="stat">
+<h3>0</h3>
+<p>Cloud Servers</p>
+</div>
+
+<div class="stat">
+<h3>∞</h3>
+<p>Password Entries</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<div class="vault-item">
+<div>
+<h4>GitHub</h4>
+<span>shivam@example.com</span>
+</div>
+🔒
+</div>
+
+<div class="vault-item">
+<div>
+<h4>Google</h4>
+<span>user@gmail.com</span>
+</div>
+🔒
+</div>
+
+<div class="vault-item">
+<div>
+<h4>Banking</h4>
+<span>••••••••••••</span>
+</div>
+🔒
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="features" class="features">
+
+<div class="container">
+
+<h2 class="section-title">
+Everything you need to manage passwords
+</h2>
+
+<p class="section-subtitle">
+Simple, fast and private password management without relying on cloud services.
+</p>
+
+<div class="feature-grid">
+
+<div class="feature">
+<div class="feature-icon">🔐</div>
+<h3>Password Vault</h3>
+<p>Store usernames, passwords, websites and notes in one secure place.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🔎</div>
+<h3>Fast Search</h3>
+<p>Instantly locate saved accounts using built-in search indexing.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">✏️</div>
+<h3>Edit Anytime</h3>
+<p>Create, update and organize password entries whenever needed.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📋</div>
+<h3>Quick Copy</h3>
+<p>Copy usernames, websites, notes and passwords with one tap.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📱</div>
+<h3>Works Offline</h3>
+<p>No internet connection required to access your vault.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🛡️</div>
+<h3>Master Password</h3>
+<p>Your vault is protected behind a single master password.</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<section id="security" class="security">
+
+<div class="container">
+
+<div class="security-box">
+
+<div>
+
+<h2>Built for Privacy</h2>
+
+<p style="margin-top:20px;color:#9fb2bf;line-height:1.8;">
+ReVault focuses on local storage and user control. Your data remains on your device and is never uploaded to external servers.
+</p>
+
+</div>
+
+<ul class="security-list">
+<li>Passwords stored locally on device</li>
+<li>Master password protected vault</li>
+<li>No account creation required</li>
+<li>No cloud synchronization</li>
+<li>No subscriptions required</li>
+<li>Offline access anywhere</li>
+<li>Private app storage sandbox</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="download" class="download">
+
+<div class="container">
+
+<h2>Download ReVault</h2>
+
+<p>
+Get started in minutes. Install ReVault on Android and keep your passwords private, local and always accessible.
+</p>
+
+<a href="assets/ReVault.apk" class="download-button">
+⬇ Download APK
+</a>
+
+</div>
+
+</section>
+
+<footer>
+<div class="container">
+© 2026 ReVault • Local First Password Manager
+</div>
+</footer>
+
+</body>
+</html>
